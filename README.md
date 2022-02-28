@@ -1,4 +1,4 @@
-## terraform-equinix-template
+## ECX Fabric L2 Connection to AWS - Terraform module
 
 <!-- TEMPLATE: Review all "TEMPLATE" comments and remove them when applied. -->
 <!-- TEMPLATE: replace "template" with the name of your project. The prefix "terraform-equinix-" informs the Terraform registry that this project is a Terraform module associated with the Equinix provider, Oreserve this prefix.  "terraform-metal-" may also be used for Equinix Metal modules, but "terraform-equinix-" will work too. -->
