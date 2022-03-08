@@ -1,13 +1,25 @@
-## ECX Fabric L2 Connection to AWS - Terraform module
+## Equinix Fabric L2 Connection To AWS Direct Connect Terraform module
 
-<!-- TEMPLATE: Review all "TEMPLATE" comments and remove them when applied. -->
-<!-- TEMPLATE: replace "template" with the name of your project. The prefix "terraform-equinix-" informs the Terraform registry that this project is a Terraform module associated with the Equinix provider, Oreserve this prefix.  "terraform-metal-" may also be used for Equinix Metal modules, but "terraform-equinix-" will work too. -->
 [![Experimental](https://img.shields.io/badge/Stability-Experimental-red.svg)](https://github.com/equinix-labs/standards#about-uniform-standards)
 [![terraform](https://github.com/equinix-labs/terraform-equinix-template/actions/workflows/integration.yaml/badge.svg)](https://github.com/equinix-labs/terraform-equinix-template/actions/workflows/integration.yaml)
 
-`terraform-equinix-template` is a minimal Terraform module that utilizes [Terraform providers for Equinix](https://registry.terraform.io/namespaces/equinix) to provision digital infrastructure and demonstrate higher level integrations.
+`terraform-equinix-fabric-connection-aws` is a Terraform module that utilizes [Terraform provider for Equinix](https://registry.terraform.io/providers/equinix/equinix/latest) and [Terraform provider for AWS](https://registry.terraform.io/providers/hashicorp/aws/latest/docs) to set up an Equinix Fabric L2 connection to AWS Direct Connect.
 
-<!-- TEMPLATE: Insert an image here of the infrastructure diagram. You can generate a starting image using instructions found at https://www.terraform.io/docs/cli/commands/graph.html#generating-images -->
+As part of Platform Equinix, your infrastructure can connect with other parties, such as public cloud providers, network service providers, or your own colocation cages in Equinix by defining an [Equinix Fabric - software-defined interconnection](https://docs.equinix.com/en-us/Content/Interconnection/Fabric/Fabric-landing-main.htm).
+
+This module creates the l2 connection in Equinix Fabric, approves the request in your account on the AWS platform, and optionally creates a AWS Direct Connect private virtual interface (VIF) and a virtual private gateway (VGW).
+
+```html
+     Origin                                              Destination
+    (A-side)                                              (Z-side)
+
+┌────────────────┐
+│ Equinix Fabric │         Equinix Fabric          ┌────────────────────┐       ┌────────────────────────────┐
+│ Port / Network ├─────    l2 connection   ───────►│        AWS         │──────►│  Private VIF ─► VGW ─► VPC │
+│ Edge Device /  │      (50 Mbps - 10 Gbps)        │   Direct Connect   │       │        (AWS Region)        │
+│ Service Token  │                                 └────────────────────┘       └────────────────────────────┘
+└────────────────┘
+```
 
 ### Usage
 
@@ -23,51 +35,48 @@ To use this module in a new project, create a file such as:
 
 ```hcl
 # main.tf
-terraform {
-  required_providers {
-    equinix = {
-      source = "equinix/equinix"
-    }
-    metal = {
-      source = "equinix/metal"
-    }
+provider "equinix" {}
+
+provider "aws" { region = "eu-central-1" }
+
+data "aws_region" "current" {}
+
+module "equinix-fabric-connection-aws" {
+  source  = "equinix-labs/fabric-connection-aws/equinix"
+
+  # required variables
+  fabric_notification_users = ["example@equinix.com"]
+  aws_account_id            = var.aws_account_id
+
+  # optional variables
+  fabric_destination_metro_code = "FR"
+  network_edge_device_id        = "DeviceID"
 }
 
-module "example" {
-  source = "github.com/equinix-labs/template"
-  # TEMPLATE: replace "template" with the name of the repo after the terraform-equinix- or terraform-metal- prefix.
-
-  # Published modules can be sourced as:
-  # source = "equinix-labs/template/equinix"
-  # See https://www.terraform.io/docs/registry/modules/publish.html for details.
-
-  # version = "0.1.0"
-
-  # TEMPLATE: insert required variables here
-}
 ```
 
 Run `terraform init -upgrade` and `terraform apply`.
 
-<!-- TEMPLATE: Expand this section with any additional information or requirements. -->
+#### Resources
+
+| Name | Type |
+| :-----: | :------: |
+| [random_string.this](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string) | resource |
+| [equinix-fabric-connection](https://registry.terraform.io/modules/equinix-labs/fabric-connection/equinix/latest?tab=inputs) | module |
+| [aws_dx_connection_confirmation.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dx_connection_confirmation) | resource |
+| [aws_dx_private_virtual_interface.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dx_private_virtual_interface) | resource |
+| [aws_vpn_gateway.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpn_gateway) | resource |
+| [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region) | data source |
 
 #### Variables
 
-|     Variable Name      |  Type   |        Default Value        | Description                                             |
-| :--------------------: | :-----: | :-------------------------: | :------------------------------------------------------ |
-|                        |         |                             |                                                         |
-
-<!-- TEMPLATE: If published, remove the table and use the following: See <https://registry.terraform.io/modules/equinix-labs/template/equinix/latest?tab=inputs> for a description of all variables. -->
+See <https://registry.terraform.io/modules/equinix-labs/fabric-connection-aws/equinix/latest?tab=inputs> for a description of all variables.
 
 #### Outputs
 
-|     Variable Name      |  Type   | Description                                             |
-| :--------------------: | :-----: | :------------------------------------------------------ |
-|                        |         |                                                         |
-
-<!-- TEMPLATE: If published, remove the table and use the following: See <https://registry.terraform.io/modules/equinix-labs/template/equinix/latest?tab=outputs> for a description of all outputs. -->
+See <https://registry.terraform.io/modules/equinix-labs/fabric-connection-aws/equinix/latest?tab=outputs> for a description of all outputs.
 
 ### Examples
 
 - [examples/simple](examples/simple/)
-
+- [examples/advanced](examples/advanced/)

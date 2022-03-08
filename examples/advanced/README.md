@@ -1,9 +1,12 @@
-# Simple Example
+# Advanced Example
 
 This example demonstrates usage of the Equinix Connection module to establish a non-redundant Equinix Fabric L2 Connection from a Equinix Fabric port to AWS Direct Connect. It will:
 
-- Create Equinix Fabric l2 connection with minimun available bandwidth for AWS service profile
+- Create Equinix Fabric l2 connection with specified bandwidth
 - Approve AWS connection request
+- Create AWS private virtual interface
+- Create AWS virtual gateway
+- Create AWS VPC
 
 ## Usage
 
