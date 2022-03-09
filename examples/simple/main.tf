@@ -19,3 +19,6 @@ module "equinix-fabric-connection-aws" {
   fabric_destination_metro_code = "FR"
 }
 
+output "connection_details" {
+  value = module.equinix-fabric-connection-aws
+}
