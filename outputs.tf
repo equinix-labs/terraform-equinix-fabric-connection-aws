@@ -1,4 +1,3 @@
-
 output "fabric_connection_uuid" {
   description = "Unique identifier of the connection."
   value       = module.equinix-fabric-connection.primary_connection.uuid

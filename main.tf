@@ -4,10 +4,10 @@ locals  {
        if action_data["key"] == "awsConnectionId"
    ])
    aws_vgw_id = var.aws_dx_create_vgw ? aws_vpn_gateway.this[0].id : var.aws_dx_vgw_id
-   aws_region = data.aws_region.current.name
+   aws_region = data.aws_region.this.name
 }
 
-data "aws_region" "current" {}
+data "aws_region" "this" {}
 
 resource "random_string" "this" {
   length  = 3

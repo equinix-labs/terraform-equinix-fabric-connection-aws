@@ -39,7 +39,7 @@ provider "equinix" {}
 
 provider "aws" { region = "eu-central-1" }
 
-data "aws_region" "current" {}
+data "aws_region" "this" {}
 
 module "equinix-fabric-connection-aws" {
   source  = "equinix-labs/fabric-connection-aws/equinix"
@@ -66,7 +66,7 @@ Run `terraform init -upgrade` and `terraform apply`.
 | [aws_dx_connection_confirmation.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dx_connection_confirmation) | resource |
 | [aws_dx_private_virtual_interface.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dx_private_virtual_interface) | resource |
 | [aws_vpn_gateway.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpn_gateway) | resource |
-| [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region) | data source |
+| [aws_region.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region) | data source |
 
 #### Variables
 
