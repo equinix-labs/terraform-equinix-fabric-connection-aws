@@ -91,7 +91,7 @@ variable "fabric_speed" {
   default     = 0
 
   validation {
-    condition = contains([50, 100, 200, 300, 400, 500, 1000, 2000, 5000, 10000], var.fabric_speed)
+    condition = contains([0, 50, 100, 200, 300, 400, 500, 1000, 2000, 5000, 10000], var.fabric_speed)
     error_message = "Valid values are (50, 100, 200, 300, 400, 500, 1000, 2000, 5000, 10000)."
   }
 }
