@@ -14,11 +14,10 @@ module "equinix-fabric-connection-aws" {
   aws_account_id            = var.aws_account_id
 
   # optional variables
-  fabric_port_name  = var.port_name
-  fabric_vlan_stag  = 1010
-  fabric_speed      = 100
-  fabric_speed_unit = "MB"
+  fabric_port_name              = var.port_name
+  fabric_vlan_stag              = 1010
   fabric_destination_metro_code = "FR"
+  fabric_speed                  = 100
 
   aws_dx_create_private_vif           = true
   aws_dx_private_vif_amazon_address   = "169.254.0.1/30"

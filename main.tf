@@ -13,7 +13,7 @@ resource "random_string" "this" {
   length  = 3
   special = false
 }
-
+//TODO (ocobleseqx) add service profile "AWS Direct Connect- High Capacity - Redundant" for speed > 1000
 module "equinix-fabric-connection" {
   source = "github.com/equinix-labs/terraform-equinix-fabric-connection"
 
@@ -35,7 +35,7 @@ module "equinix-fabric-connection" {
   vlan_stag                 = var.fabric_vlan_stag
   service_token_id          = var.fabric_service_token_id
   speed                     = var.fabric_speed
-  speed_unit                = var.fabric_speed_unit
+  speed_unit                = "MB"
   purcharse_order_number    = var.fabric_purcharse_order_number
 }
 

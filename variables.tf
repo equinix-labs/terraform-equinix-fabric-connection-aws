@@ -85,23 +85,15 @@ variable "fabric_service_token_id" {
 variable "fabric_speed" {
   type        = number
   description = <<EOF
-  Speed/Bandwidth to be allocated to the connection - (MB or GB). If not specified, it will be used the minimum
+  Speed/Bandwidth in Mbps to be allocated to the connection. If not specified, it will be used the minimum
   bandwidth available for the AWS service profile.
   EOF
   default     = 0
-}
-
-variable "fabric_speed_unit" {
-  type        = string
-  description = "Unit of the speed/bandwidth to be allocated to the connection."
-  default     = ""
 
   validation {
-    condition = (
-      var.fabric_speed_unit == "" ? true : contains(["MB", "GB"], var.fabric_speed_unit)
-    )
-    error_message = "Valid values for are (MB, GB)."
-  } 
+    condition = contains([50, 100, 200, 300, 400, 500, 1000, 2000, 5000, 10000], var.fabric_speed)
+    error_message = "Valid values are (50, 100, 200, 300, 400, 500, 1000, 2000, 5000, 10000)."
+  }
 }
 
 variable "fabric_purcharse_order_number" {
@@ -161,7 +153,7 @@ variable "aws_dx_private_vif_address_family" {
 
   validation {
     condition = contains(["ipv4", "ipv6"], var.aws_dx_private_vif_address_family)
-    error_message = "Valid values for 'aws_dx_private_vif_address_family' are (ipv4, ipv6)."
+    error_message = "Valid values are (ipv4, ipv6)."
   }
 }
 
