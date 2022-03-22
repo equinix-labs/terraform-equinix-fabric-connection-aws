@@ -17,8 +17,8 @@ variable "fabric_connection_name" {
 variable "fabric_destination_metro_code" {
   type        = string
   description = <<EOF
-  Destination Metro code where the connection will be created. If you do not know the code,'fabric_destination_metro_name' can be use
-  instead.
+  Destination Metro code where the connection will be created. If you do not know the code,
+  'fabric_destination_metro_name' can be use instead."
   EOF
   default     = ""
 
@@ -33,9 +33,8 @@ variable "fabric_destination_metro_code" {
 variable "fabric_destination_metro_name" {
   type        = string
   description = <<EOF
-  Only required in the absence of 'fabric_destination_metro_code'. Metro name where the connection will be created, i.e.
-  'Frankfurt', 'Silicon Valley', 'Ashburn'. One of 'metro_code', 'metro_name' must be
-  provided.
+  Only required in the absence of 'fabric_destination_metro_code'. Metro name where the connection will be created,
+  i.e. 'Frankfurt', 'Silicon Valley', 'Ashburn'. One of 'metro_code', 'metro_name' must be provided.
   EOF
   default     = ""
 }
@@ -49,10 +48,19 @@ variable "network_edge_device_id" {
 variable "network_edge_device_interface_id" {
   type        = number
   description = <<EOF
-  Applicable with 'network_edge_device_id', identifier of network interface on a given device, used for a connection. If not
-  specified then first available interface will be selected.
+  Applicable with 'network_edge_device_id', identifier of network interface on a given device, used for a connection.
+  If not specified then first available interface will be selected.
   EOF
   default     = 0
+}
+
+variable "network_edge_configure_bgp" {
+  type        = bool
+  description = <<EOF
+  Applicable with 'network_edge_device_id' and 'aws_dx_create_vif'. Creation and management of Equinix Network Edge BGP
+  peering configurations.
+  EOF
+  default     = false
 }
 
 variable "fabric_port_name" {
@@ -67,8 +75,8 @@ variable "fabric_port_name" {
 variable "fabric_vlan_stag" {
   type        = number
   description = <<EOF
-  S-Tag/Outer-Tag of the primary connection - a numeric character ranging from 2 - 4094. Required if
-  'port_name' is specified.
+  S-Tag/Outer-Tag of the primary connection - a numeric character ranging from 2 - 4094. Required if 'port_name' is
+  specified.
   EOF
   default     = 0
 }
@@ -85,8 +93,8 @@ variable "fabric_service_token_id" {
 variable "fabric_speed" {
   type        = number
   description = <<EOF
-  Speed/Bandwidth in Mbps to be allocated to the connection. If not specified, it will be used the minimum
-  bandwidth available for the AWS service profile.
+  Speed/Bandwidth in Mbps to be allocated to the connection. If not specified, it will be used the minimum bandwidth
+  available for the AWS service profile.
   EOF
   default     = 0
 
@@ -107,13 +115,13 @@ variable "aws_account_id" {
   description = "Your AWS account ID. Required in Equinix Fabric as authorization key."
 }
 
-variable "aws_dx_create_private_vif" {
+variable "aws_dx_create_vif" {
   type        = bool
   description = "Create a DX Private virtual Interface."
   default     = false
 }
 
-variable "aws_dx_private_vif_name" {
+variable "aws_dx_vif_name" {
   type        = string
   description = "The name for the virtual interface. It will be auto-generated if not specified."
   default     = ""
@@ -128,7 +136,7 @@ variable "aws_dx_create_vgw" {
 variable "aws_dx_vgw_id" {
   type        = string
   description = <<EOF
-  If 'aws_dx_create_private_vif' is true but you already have an existing VGW you can left 'aws_dx_create_vgw' false
+  If 'aws_dx_create_vif' is true but you already have an existing VGW you can left 'aws_dx_create_vgw' false
   and set your VGW id instead.
   EOF
   default     = ""
@@ -146,30 +154,30 @@ variable "aws_vpn_gateway_name" {
   default     = ""
 }
 
-variable "aws_dx_private_vif_address_family" {
+variable "aws_dx_vif_address_family" {
   type        = string
   description = "The address family for the BGP peer. ipv4 or ipv6"
   default     = "ipv4"
 
   validation {
-    condition = contains(["ipv4", "ipv6"], var.aws_dx_private_vif_address_family)
+    condition = contains(["ipv4", "ipv6"], var.aws_dx_vif_address_family)
     error_message = "Valid values are (ipv4, ipv6)."
   }
 }
 
-variable "aws_dx_private_vif_bgp_asn" {
+variable "aws_dx_vif_customer_asn" {
   type        = string
-  description = "The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration."
+  description = "The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration on customer side."
   default     = "65000"
 }
 
-variable "aws_dx_private_vif_amazon_address" {
+variable "aws_dx_vif_amazon_address" {
   type        = string
   description = "The IPv4 CIDR address to use to send traffic to Amazon. Required for IPv4 BGP peers."
   default     = ""
 }
 
-variable "aws_dx_private_vif_customer_address" {
+variable "aws_dx_vif_customer_address" {
   type        = string
   description = "The IPv4 CIDR destination address to which Amazon should send traffic. Required for IPv4 BGP peers."
   default     = ""

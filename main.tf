@@ -44,18 +44,18 @@ resource "aws_dx_connection_confirmation" "this" {
 }
 
 resource "aws_dx_private_virtual_interface" "this" {
-  count = var.aws_dx_create_private_vif ? 1 : 0
+  count = var.aws_dx_create_vif ? 1 : 0
 
-  name             = var.aws_dx_private_vif_name != "" ? var.aws_dx_private_vif_name : lower(format("vif-%s", random_string.this.result))
+  name             = var.aws_dx_vif_name != "" ? var.aws_dx_vif_name : lower(format("vif-%s", random_string.this.result))
   connection_id    = aws_dx_connection_confirmation.this.id
 
-  address_family   = var.aws_dx_private_vif_address_family
-  bgp_asn          = var.aws_dx_private_vif_bgp_asn
+  address_family   = var.aws_dx_vif_address_family
+  bgp_asn          = var.aws_dx_vif_customer_asn
   vlan             = module.equinix-fabric-connection.primary_connection.zside_vlan_stag
-  amazon_address   = var.aws_dx_private_vif_amazon_address != "" ? var.aws_dx_private_vif_amazon_address : null
-  customer_address = var.aws_dx_private_vif_customer_address != "" ? var.aws_dx_private_vif_customer_address : null
+  amazon_address   = var.aws_dx_vif_amazon_address
+  customer_address = var.aws_dx_vif_customer_address
   mtu              = var.aws_dx_mtu_size
-  bgp_auth_key     = var.aws_dx_bgp_auth_key != "" ? var.aws_dx_bgp_auth_key : null
+  bgp_auth_key     = var.aws_dx_bgp_auth_key
 
   vpn_gateway_id   = local.aws_vgw_id
 
@@ -72,4 +72,15 @@ resource "aws_vpn_gateway" "this" {
       Name = var.aws_vpn_gateway_name != "" ? var.aws_vpn_gateway_name : lower(format("vgw-%s", random_string.this.result))
     },
   )
+}
+
+resource "equinix_network_bgp" "this" {
+  count = alltrue(var.aws_dx_create_vif, var.network_edge_device_id != "", var.network_edge_configure_bgp) ? 1 : 0
+
+  connection_id      = module.equinix-fabric-connection.primary_connection.uuid
+  local_ip_address   = aws_dx_private_virtual_interface.this[0].customer_address
+  local_asn          = var.aws_dx_vif_customer_asn
+  remote_ip_address  = split("/", aws_dx_private_virtual_interface.this[0].customer_address)[0]
+  remote_asn         = aws_dx_private_virtual_interface.this[0].amazon_side_asn
+  authentication_key = var.aws_dx_bgp_auth_key
 }

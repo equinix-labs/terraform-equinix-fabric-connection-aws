@@ -18,7 +18,10 @@ This module creates the l2 connection in Equinix Fabric, approves the request in
 │ Port / Network ├─────    l2 connection   ───────►│        AWS         │──────►│  Private VIF ─► VGW ─► VPC │
 │ Edge Device /  │      (50 Mbps - 10 Gbps)        │   Direct Connect   │       │        (AWS Region)        │
 │ Service Token  │                                 └────────────────────┘       └────────────────────────────┘
-└────────────────┘
+└────────────────┘                                                                   │
+         │                                                                           │
+         └ - - - - - - - - - - Network Edge Device - - - - - - - - - - - - - - - - - ┘
+                                   BGP peering
 ```
 
 ### Usage
@@ -62,7 +65,8 @@ Run `terraform init -upgrade` and `terraform apply`.
 | Name | Type |
 | :-----: | :------: |
 | [random_string.this](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string) | resource |
-| [equinix-fabric-connection](https://registry.terraform.io/modules/equinix-labs/fabric-connection/equinix/latest?tab=inputs) | module |
+| [equinix-fabric-connection](https://registry.terraform.io/modules/equinix-labs/fabric-connection/equinix/latest) | module |
+| [equinix_network_bgp.this](https://registry.terraform.io/providers/equinix/equinix/latest/docs/resources/equinix_network_bgp) | resource |
 | [aws_dx_connection_confirmation.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dx_connection_confirmation) | resource |
 | [aws_dx_private_virtual_interface.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dx_private_virtual_interface) | resource |
 | [aws_vpn_gateway.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpn_gateway) | resource |

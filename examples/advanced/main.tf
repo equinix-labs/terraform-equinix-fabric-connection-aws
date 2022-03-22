@@ -19,9 +19,9 @@ module "equinix-fabric-connection-aws" {
   fabric_destination_metro_code = "FR"
   fabric_speed                  = 100
 
-  aws_dx_create_private_vif           = true
-  aws_dx_private_vif_amazon_address   = "169.254.0.1/30"
-  aws_dx_private_vif_customer_address = "169.254.0.2/30"
+  aws_dx_create_vif           = true
+  aws_dx_vif_amazon_address   = "169.254.0.1/30"
+  aws_dx_vif_customer_address = "169.254.0.2/30"
   aws_dx_create_vgw                   = true
   aws_vpc_id                          = aws_vpc.this.id
 }
