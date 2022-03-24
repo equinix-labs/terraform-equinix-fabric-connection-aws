@@ -17,8 +17,8 @@ variable "fabric_connection_name" {
 variable "fabric_destination_metro_code" {
   type        = string
   description = <<EOF
-  Destination Metro code where the connection will be created. If you do not know the code,
-  'fabric_destination_metro_name' can be use instead."
+  Destination Metro code where the connection will be created. If you do not know the code, 'fabric_destination_metro_name'
+  can be use instead.
   EOF
   default     = ""
 
@@ -34,7 +34,8 @@ variable "fabric_destination_metro_name" {
   type        = string
   description = <<EOF
   Only required in the absence of 'fabric_destination_metro_code'. Metro name where the connection will be created,
-  i.e. 'Frankfurt', 'Silicon Valley', 'Ashburn'. One of 'metro_code', 'metro_name' must be provided.
+  i.e. 'Frankfurt', 'Silicon Valley', 'Ashburn'. One of 'fabric_destination_metro_code', 'fabric_destination_metro_name'
+  must be provided.
   EOF
   default     = ""
 }
@@ -174,13 +175,13 @@ variable "aws_dx_vif_customer_asn" {
 variable "aws_dx_vif_amazon_address" {
   type        = string
   description = "The IPv4 CIDR address to use to send traffic to Amazon. Required for IPv4 BGP peers."
-  default     = ""
+  default     = "169.254.0.1/30"
 }
 
 variable "aws_dx_vif_customer_address" {
   type        = string
   description = "The IPv4 CIDR destination address to which Amazon should send traffic. Required for IPv4 BGP peers."
-  default     = ""
+  default     = "169.254.0.2/30"
 }
 
 variable "aws_dx_mtu_size" {

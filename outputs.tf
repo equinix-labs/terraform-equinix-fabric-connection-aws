@@ -38,6 +38,16 @@ output "fabric_connection_seller_region" {
   value       = module.equinix-fabric-connection.primary_connection.seller_region
 }
 
+output "network_edge_bgp_state" {
+  description = "Network Edge device BGP peer state."
+  value       = try(equinix_network_bgp.this[0].state, "")
+}
+
+output "network_edge_bgp_provisioning_status" {
+  description = "Network Edge device BGP peering configuration provisioning status."
+  value       = try(equinix_network_bgp.this[0].provisioning_status, "")
+}
+
 output "aws_dx_id" {
   description = "AWS Direct connection ID."
   value       = local.aws_dx_id

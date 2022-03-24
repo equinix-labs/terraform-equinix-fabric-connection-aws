@@ -7,17 +7,17 @@
 
 As part of Platform Equinix, your infrastructure can connect with other parties, such as public cloud providers, network service providers, or your own colocation cages in Equinix by defining an [Equinix Fabric - software-defined interconnection](https://docs.equinix.com/en-us/Content/Interconnection/Fabric/Fabric-landing-main.htm).
 
-This module creates the l2 connection in Equinix Fabric, approves the request in your account on the AWS platform, and optionally creates a AWS Direct Connect private virtual interface (VIF) and a virtual private gateway (VGW).
+This module creates the l2 connection in Equinix Fabric, approves the request in your account on the AWS platform, and optionally creates a AWS Direct Connect private virtual interface (VIF) and a virtual private gateway (VGW). BGP in Equinix side can be optionally configured if Network Edge device is used.
 
 ```html
      Origin                                              Destination
     (A-side)                                              (Z-side)
 
 ┌────────────────┐
-│ Equinix Fabric │         Equinix Fabric          ┌────────────────────┐       ┌────────────────────────────┐
-│ Port / Network ├─────    l2 connection   ───────►│        AWS         │──────►│  Private VIF ─► VGW ─► VPC │
-│ Edge Device /  │      (50 Mbps - 10 Gbps)        │   Direct Connect   │       │        (AWS Region)        │
-│ Service Token  │                                 └────────────────────┘       └────────────────────────────┘
+│ Equinix Fabric │         Equinix Fabric          ┌────────────────────┐       ┌──────────────────────┐
+│ Port / Network ├─────    l2 connection   ───────►│        AWS         │──────►│  Private VIF ─► VGW  │
+│ Edge Device /  │      (50 Mbps - 10 Gbps)        │   Direct Connect   │       │     (AWS Region)     │
+│ Service Token  │                                 └────────────────────┘       └──────────────────────┘
 └────────────────┘                                                                   │
          │                                                                           │
          └ - - - - - - - - - - Network Edge Device - - - - - - - - - - - - - - - - - ┘
@@ -82,5 +82,5 @@ See <https://registry.terraform.io/modules/equinix-labs/fabric-connection-aws/eq
 
 ### Examples
 
-- [examples/simple](examples/simple/)
-- [examples/advanced](examples/advanced/)
+- [examples/fabric-port-connection/](examples/fabric-port-connection/)
+- [examples/network-edge-device-connection](examples/network-edge-device-connection/)

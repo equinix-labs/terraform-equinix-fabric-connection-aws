@@ -2,7 +2,7 @@ provider "equinix" {}
 
 provider "aws" { region = "eu-central-1" }
 
-variable "port_name" {}
+variable "equinix_ne_device_id" {}
 
 variable "aws_account_id" {}
 
@@ -14,16 +14,15 @@ module "equinix-fabric-connection-aws" {
   aws_account_id            = var.aws_account_id
 
   # optional variables
-  fabric_port_name              = var.port_name
-  fabric_vlan_stag              = 1010
+  network_edge_device_id        = var.equinix_ne_device_id
+  network_edge_configure_bgp    = true
+
   fabric_destination_metro_code = "FR"
-  fabric_speed                  = 100
+  fabric_speed                  = 200
 
   aws_dx_create_vif           = true
-  aws_dx_vif_amazon_address   = "169.254.0.1/30"
-  aws_dx_vif_customer_address = "169.254.0.2/30"
-  aws_dx_create_vgw                   = true
-  aws_vpc_id                          = aws_vpc.this.id
+  aws_dx_create_vgw           = true
+  aws_vpc_id                  = aws_vpc.this.id
 }
 
 resource "aws_vpc" "this" {
