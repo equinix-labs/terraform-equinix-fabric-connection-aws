@@ -83,5 +83,5 @@ See <https://registry.terraform.io/modules/equinix-labs/fabric-connection-aws/eq
 
 ### Examples
 
-- [Fabric Port connection/](https://registry.terraform.io/modules/equinix-labs/fabric-connection-aws/equinix/latest/examples/fabric-port-connection/)
+- [Fabric Port connection](https://registry.terraform.io/modules/equinix-labs/fabric-connection-aws/equinix/latest/examples/fabric-port-connection/)
 - [Network Edge device connection](https://registry.terraform.io/modules/equinix-labs/fabric-connection-aws/equinix/latest/examples/network-edge-device-connection/)
