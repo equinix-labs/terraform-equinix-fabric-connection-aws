@@ -4,15 +4,23 @@ locals  {
        if action_data["key"] == "awsConnectionId"
    ])
    aws_vgw_id = var.aws_dx_create_vgw ? aws_vpn_gateway.this[0].id : var.aws_dx_vgw_id
+   aws_vpc_id = alltrue([var.aws_dx_create_vif, var.aws_vpc_id != ""]) ? var.aws_vpc_id : data.aws_vpc.this[0].id
    aws_region = data.aws_region.this.name
 }
 
 data "aws_region" "this" {}
 
+data "aws_vpc" "this" {
+  count = alltrue([var.aws_dx_create_vif, var.aws_vpc_id == ""]) ? 1 : 0
+
+  default = true
+}
+
 resource "random_string" "this" {
   length  = 3
   special = false
 }
+
 //TODO (ocobleseqx) add service profile "AWS Direct Connect- High Capacity - Redundant" for speed > 1000
 module "equinix-fabric-connection" {
   source = "github.com/equinix-labs/terraform-equinix-fabric-connection"
@@ -65,7 +73,7 @@ resource "aws_dx_private_virtual_interface" "this" {
 resource "aws_vpn_gateway" "this" {
   count = var.aws_dx_create_vgw ? 1 : 0
 
-  vpc_id = var.aws_vpc_id
+  vpc_id = local.aws_vpc_id
   tags = merge(
     var.aws_tags,
     {
@@ -82,5 +90,5 @@ resource "equinix_network_bgp" "this" {
   local_asn          = var.aws_dx_vif_customer_asn
   remote_ip_address  = split("/", aws_dx_private_virtual_interface.this[0].amazon_address)[0]
   remote_asn         = aws_dx_private_virtual_interface.this[0].amazon_side_asn
-  authentication_key = var.aws_dx_bgp_auth_key != "" ? var.aws_dx_bgp_auth_key : null
+  authentication_key = aws_dx_private_virtual_interface.this[0].bgp_auth_key != "" ? aws_dx_private_virtual_interface.this[0].bgp_auth_key : null
 }

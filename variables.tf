@@ -145,7 +145,7 @@ variable "aws_dx_vgw_id" {
 
 variable "aws_vpc_id" {
   type        = string
-  description = "The VPC ID to create the VGW. Required if 'aws_dx_create_vgw' is true."
+  description = "The ID of the VPC to connect with the AWS VGW. Applicable if 'aws_dx_create_vgw' is true. If not specified 'Default' VPC will be used."
   default     = ""
 }
 

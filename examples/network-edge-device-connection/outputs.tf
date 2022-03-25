@@ -27,7 +27,3 @@ output "network_edge_bgp_provisioning_status" {
 output "aws_direct_connect_id" {
   value = module.equinix-fabric-connection-aws.aws_dx_id
 }
-
-output "aws_vpc_id" {
-  value = aws_vpc.this.id
-}
