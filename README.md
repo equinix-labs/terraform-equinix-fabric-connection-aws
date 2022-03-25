@@ -60,10 +60,18 @@ module "equinix-fabric-connection-aws" {
 
 Run `terraform init -upgrade` and `terraform apply`.
 
-#### Resources
+### Variables
+
+See <https://registry.terraform.io/modules/equinix-labs/fabric-connection-aws/equinix/latest?tab=inputs> for a description of all variables.
+
+### Outputs
+
+See <https://registry.terraform.io/modules/equinix-labs/fabric-connection-aws/equinix/latest?tab=outputs> for a description of all outputs.
+
+### Resources
 
 | Name | Type |
-| :-----: | :------: |
+|------|------|
 | [random_string.this](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string) | resource |
 | [equinix-fabric-connection](https://registry.terraform.io/modules/equinix-labs/fabric-connection/equinix/latest) | module |
 | [equinix_network_bgp.this](https://registry.terraform.io/providers/equinix/equinix/latest/docs/resources/equinix_network_bgp) | resource |
@@ -73,15 +81,7 @@ Run `terraform init -upgrade` and `terraform apply`.
 | [aws_vpc.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/vpc) | data source |
 | [aws_region.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region) | data source |
 
-#### Variables
-
-See <https://registry.terraform.io/modules/equinix-labs/fabric-connection-aws/equinix/latest?tab=inputs> for a description of all variables.
-
-#### Outputs
-
-See <https://registry.terraform.io/modules/equinix-labs/fabric-connection-aws/equinix/latest?tab=outputs> for a description of all outputs.
-
 ### Examples
 
-- [examples/fabric-port-connection/](examples/fabric-port-connection/)
-- [examples/network-edge-device-connection](examples/network-edge-device-connection/)
+- [Fabric Port connection/](https://registry.terraform.io/modules/equinix-labs/fabric-connection-aws/equinix/latest/examples/fabric-port-connection/)
+- [Network Edge device connection](https://registry.terraform.io/modules/equinix-labs/fabric-connection-aws/equinix/latest/examples/network-edge-device-connection/)
