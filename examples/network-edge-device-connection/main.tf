@@ -3,7 +3,7 @@ provider "equinix" {}
 provider "aws" { region = "eu-central-1" }
 
 module "equinix-fabric-connection-aws" {
-  source = "github.com/equinix-labs/terraform-equinix-fabric-connection-aws"
+  source = "equinix-labs/fabric-connection-aws/equinix"
 
   # required variables
   fabric_notification_users = ["example@equinix.com"]
