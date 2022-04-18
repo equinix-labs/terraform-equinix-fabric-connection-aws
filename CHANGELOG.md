@@ -1,9 +1,15 @@
-## 0.1.1 (April 18, 2022)
+## 0.1.2 (April 18, 2022)
 
 BUG FIXES:
 
 - Version of `equinix-fabric-connection` module was updated to v0.1.1
 - Control outputs that can access to null variables.
+
+## 0.1.1 (March 28, 2022)
+
+BUG FIXES:
+
+- 'aws_vpc_id' local variable was producing an empty tuple.
 
 ## 0.1.0 (March 25, 2022)
 
