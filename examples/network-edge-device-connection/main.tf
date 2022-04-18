@@ -10,8 +10,8 @@ module "equinix-fabric-connection-aws" {
   aws_account_id            = var.aws_account_id
 
   # optional variables
-  network_edge_device_id        = var.device_id
-  network_edge_configure_bgp    = true
+  network_edge_device_id     = var.device_id
+  network_edge_configure_bgp = true
 
   fabric_destination_metro_code = "FR"
   fabric_speed                  = 200

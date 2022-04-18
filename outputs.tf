@@ -40,12 +40,12 @@ output "fabric_connection_seller_region" {
 
 output "network_edge_bgp_state" {
   description = "Network Edge device BGP peer state."
-  value       = try(equinix_network_bgp.this[0].state, "")
+  value       = try(equinix_network_bgp.this[0].state, null)
 }
 
 output "network_edge_bgp_provisioning_status" {
   description = "Network Edge device BGP peering configuration provisioning status."
-  value       = try(equinix_network_bgp.this[0].provisioning_status, "")
+  value       = try(equinix_network_bgp.this[0].provisioning_status, null)
 }
 
 output "aws_dx_id" {
@@ -55,10 +55,10 @@ output "aws_dx_id" {
 
 output "aws_vgw_id" {
   description = "AWS Virtual Gateway ID."
-  value       = try(local.aws_vgw_id, "")
+  value       = try(local.aws_vgw_id, null)
 }
 
 output "aws_vif_id" {
   description = "AWS Private Virtual Interface ID."
-  value       = try(aws_dx_private_virtual_interface.this[0].id, "")
+  value       = try(aws_dx_private_virtual_interface.this[0].id, null)
 }

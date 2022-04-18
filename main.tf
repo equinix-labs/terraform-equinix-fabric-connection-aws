@@ -24,7 +24,7 @@ resource "random_string" "this" {
 //TODO (ocobleseqx) add service profile "AWS Direct Connect- High Capacity - Redundant" for speed > 1000
 module "equinix-fabric-connection" {
   source = "equinix-labs/fabric-connection/equinix"
-  version = "0.1.0"
+  version = "0.1.1"
 
   # required variables
   notification_users = var.fabric_notification_users
