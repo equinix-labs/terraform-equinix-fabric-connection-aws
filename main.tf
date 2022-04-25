@@ -4,15 +4,13 @@ locals  {
        if action_data["key"] == "awsConnectionId"
    ])
    aws_vgw_id = var.aws_dx_create_vgw ? aws_vpn_gateway.this[0].id : var.aws_dx_vgw_id
-   aws_vpc_id = coalesce(var.aws_vpc_id, data.aws_vpc.this[0].id)
+   aws_vpc_id = coalesce(var.aws_vpc_id, data.aws_vpc.this.id)
    aws_region = data.aws_region.this.name
 }
 
 data "aws_region" "this" {}
 
 data "aws_vpc" "this" {
-  count = var.aws_vpc_id == "" ? 1 : 0
-
   default = true
 }
 
