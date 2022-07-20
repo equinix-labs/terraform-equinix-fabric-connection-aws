@@ -4,7 +4,7 @@ terraform {
   required_providers {
     equinix = {
       source  = "equinix/equinix"
-      version = ">= 1.5.0"
+      version = ">= 1.7.0"
     }
     aws = {
       source  = "hashicorp/aws"

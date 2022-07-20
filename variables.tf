@@ -105,7 +105,7 @@ variable "fabric_speed" {
   }
 }
 
-variable "fabric_purcharse_order_number" {
+variable "fabric_purchase_order_number" {
   type        = string
   description = "Connection's purchase order number to reflect on the invoice."
   default     = ""

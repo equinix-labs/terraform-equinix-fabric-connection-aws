@@ -85,3 +85,4 @@ See <https://registry.terraform.io/modules/equinix-labs/fabric-connection-aws/eq
 
 - [Fabric Port connection](https://registry.terraform.io/modules/equinix-labs/fabric-connection-aws/equinix/latest/examples/fabric-port-connection/)
 - [Network Edge device connection](https://registry.terraform.io/modules/equinix-labs/fabric-connection-aws/equinix/latest/examples/network-edge-device-connection/)
+- [Service Token (a-side) Equinix Metal to AWS connection](https://registry.terraform.io/modules/equinix-labs/fabric-connection-aws/equinix/latest/examples/service-token-metal-to-aws-connection/)

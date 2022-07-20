@@ -19,10 +19,9 @@ resource "random_string" "this" {
   special = false
 }
 
-//TODO (ocobleseqx) add service profile "AWS Direct Connect- High Capacity - Redundant" for speed > 1000
 module "equinix-fabric-connection" {
   source = "equinix-labs/fabric-connection/equinix"
-  version = "0.1.1"
+  version = "0.3.1"
 
   # required variables
   notification_users = var.fabric_notification_users
@@ -30,7 +29,7 @@ module "equinix-fabric-connection" {
   # optional variables
   name = var.fabric_connection_name
 
-  seller_profile_name       = "AWS Direct Connect"
+  seller_profile_name       = var.fabric_speed < 1000 ? "AWS Direct Connect" : "AWS Direct Connect - High Capacity"
   seller_metro_code         = var.fabric_destination_metro_code
   seller_metro_name         = var.fabric_destination_metro_name
   seller_region             = local.aws_region
@@ -43,7 +42,7 @@ module "equinix-fabric-connection" {
   service_token_id          = var.fabric_service_token_id
   speed                     = var.fabric_speed
   speed_unit                = "MB"
-  purcharse_order_number    = var.fabric_purcharse_order_number
+  purchase_order_number    = var.fabric_purchase_order_number
 }
 
 resource "aws_dx_connection_confirmation" "this" {
