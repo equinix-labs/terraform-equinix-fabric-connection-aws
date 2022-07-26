@@ -1,3 +1,10 @@
+## 0.2.1 (July 21, 2022)
+
+BUG FIXES:
+
+- Plan was failing if there was no default VPC even aws_vpc_id was defined [#2](https://github.com/equinix-labs/terraform-equinix-fabric-connection-aws/issues/2)
+- Output 'aws_dx_id' was returning vpc id [#2](https://github.com/equinix-labs/terraform-equinix-fabric-connection-aws/issues/2)
+
 ## 0.2.0 (July 20, 2022)
 
 FEATURES:
