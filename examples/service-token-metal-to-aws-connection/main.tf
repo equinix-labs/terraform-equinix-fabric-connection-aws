@@ -41,6 +41,7 @@ resource "equinix_metal_connection" "this" {
     vlans              = [equinix_metal_vlan.this.vxlan]
 }
 
+## Create an AWS VPC
 resource "aws_vpc" "this" {
   cidr_block = "10.0.0.0/16"
 }

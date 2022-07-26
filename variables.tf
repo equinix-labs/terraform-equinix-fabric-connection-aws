@@ -145,13 +145,16 @@ variable "aws_dx_vgw_id" {
 
 variable "aws_vpc_id" {
   type        = string
-  description = "The ID of the VPC to connect with the AWS VGW. Applicable if 'aws_dx_create_vgw' is true. If not specified 'Default' VPC will be used."
+  description = <<EOF
+  The ID of the VPC to connect with the AWS VGW. Applicable if 'aws_dx_create_vgw' is true. If not specified 'Default'
+  VPC will be used (If applicable it will fail if there is no 'Default' VPC for the account in the selected region).
+  EOF
   default     = ""
 }
 
 variable "aws_vpn_gateway_name" {
   type        = string
-  description = "The name for the VPC VPN Gateway. It will be auto-generated if not specified."
+  description = "The name for the Virtual Private Gateway. It will be auto-generated if not specified."
   default     = ""
 }
 

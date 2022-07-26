@@ -58,6 +58,11 @@ output "aws_vgw_id" {
   value       = try(local.aws_vgw_id, null)
 }
 
+output "aws_vpc_id" {
+  description = "AWS VPC ID."
+  value       = try(local.aws_vpc_id, null)
+}
+
 output "aws_vif_id" {
   description = "AWS Private Virtual Interface ID."
   value       = try(aws_dx_private_virtual_interface.this[0].id, null)

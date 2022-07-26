@@ -22,23 +22,23 @@ variable "aws_account_id" {
 }
 
 variable "aws_region" {
-  type = string
+  type        = string
   description = <<EOF
   The region for the AWS Direct connect, e.g. 'eu-west-1'. NOTE that 'aws_region' and 'fabric_destination_metro_code' must correspond to same location,
   i.e Frankfurt will be: region = "eu-central-1" and fabric_destination_metro_code "FR"
   EOF
-  default = "us-west-1"
+  default     = "us-west-1"
 }
 
 variable "metal_project_id" {
   type        = string
-  description = "ID of the project where the connection is scoped to, used to look up the project."
+  description = "(Required) ID of the project where the connection is scoped to, used to look up the project."
 }
 
 variable "fabric_notification_users" {
   type        = list(string)
   description = "A list of email addresses used for sending connection update notifications."
-  default = ["example@equinix.com"]
+  default     = ["example@equinix.com"]
 }
 
 variable "fabric_destination_metro_code" {
