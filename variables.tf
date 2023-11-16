@@ -146,7 +146,7 @@ variable "aws_dx_vgw_id" {
   If 'aws_dx_create_vif' is true but you already have an existing VGW you can left 'aws_dx_create_vgw' false
   and set your VGW id instead.
   EOF
-  default     = ""
+  default     = null
 }
 
 variable "aws_dx_gateway_id" {
