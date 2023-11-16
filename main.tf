@@ -4,6 +4,7 @@ locals  {
        if action_data["key"] == "awsConnectionId"
    ])
    aws_vgw_id = var.aws_dx_create_vgw ? aws_vpn_gateway.this[0].id : var.aws_dx_vgw_id
+   aws_dx_gateway_id = var.aws_dx_create_dx_gw ? aws_dx_gateway.this[0].id : var.aws_dx_gateway_id
    aws_vpc_id = var.aws_dx_create_vgw ? data.aws_vpc.this[0].id : ""
    aws_region = data.aws_region.this.name
 }
@@ -67,6 +68,7 @@ resource "aws_dx_private_virtual_interface" "this" {
   bgp_auth_key     = var.aws_dx_bgp_auth_key
 
   vpn_gateway_id   = local.aws_vgw_id
+  dx_gateway_id    = local.aws_dx_gateway_id
 
   tags = var.aws_tags
 }
@@ -81,6 +83,13 @@ resource "aws_vpn_gateway" "this" {
       Name = var.aws_vpn_gateway_name != "" ? var.aws_vpn_gateway_name : lower(format("vgw-%s", random_string.this.result))
     },
   )
+}
+
+resource "aws_dx_gateway" "this" {
+  count = var.aws_dx_create_dx_gw ? 1 : 0
+
+  name = var.aws_dx_gateway_name != "" ? var.aws_dx_gateway_name : lower(format("dxgw-%s", random_string.this.result))
+  amazon_side_asn = var.aws_dx_gateway_asn
 }
 
 resource "equinix_network_bgp" "this" {

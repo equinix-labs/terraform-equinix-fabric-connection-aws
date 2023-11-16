@@ -134,13 +134,28 @@ variable "aws_dx_create_vgw" {
   default     = false
 }
 
+variable "aws_dx_create_dx_gw" {
+  type        = bool
+  description = "Create a DX Gateway."
+  default     = false
+}
+
 variable "aws_dx_vgw_id" {
   type        = string
   description = <<EOF
   If 'aws_dx_create_vif' is true but you already have an existing VGW you can left 'aws_dx_create_vgw' false
   and set your VGW id instead.
   EOF
-  default     = ""
+  default     = null
+}
+
+variable "aws_dx_gateway_id" {
+  type        = string
+  description = <<EOF
+  If 'aws_dx_create_vif' is true but you already have an existing DX Gateway you can left 'aws_dx_create_dx_gw' false
+  and set your DX Gateway id instead. 'aws_dx_gateway_id' conflicts with 'aws_dx_vgw_id'.
+  EOF
+  default     = null
 }
 
 variable "aws_vpc_id" {
@@ -156,6 +171,21 @@ variable "aws_vpn_gateway_name" {
   type        = string
   description = "The name for the Virtual Private Gateway. It will be auto-generated if not specified."
   default     = ""
+}
+
+variable "aws_dx_gateway_name" {
+  type        = string
+  description = "The name for the DX Gateway. It will be auto-generated if not specified."
+  default     = ""
+}
+
+variable "aws_dx_gateway_asn" {
+  type        = number
+  description = <<EOF
+  The ASN for the Amazon side of the connection. The ASN must be in the private range of 64512 to 65534 or
+  4200000000 to 4294967294. Required if 'aws_dx_create_dx_gw' is true.
+  EOF
+  default     = 64512
 }
 
 variable "aws_dx_vif_address_family" {
