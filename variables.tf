@@ -155,7 +155,7 @@ variable "aws_dx_gateway_id" {
   If 'aws_dx_create_vif' is true but you already have an existing DX Gateway you can left 'aws_dx_create_dx_gw' false
   and set your DX Gateway id instead. 'aws_dx_gateway_id' conflicts with 'aws_dx_vgw_id'.
   EOF
-  default     = ""
+  default     = null
 }
 
 variable "aws_vpc_id" {
