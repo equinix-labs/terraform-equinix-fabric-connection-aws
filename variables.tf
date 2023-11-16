@@ -181,8 +181,11 @@ variable "aws_dx_gateway_name" {
 
 variable "aws_dx_gateway_asn" {
   type        = number
-  description = "The ASN for the Amazon side of the connection. It will be auto-generated if not specified."
-  default     = null
+  description = <<EOF
+  The ASN for the Amazon side of the connection. The ASN must be in the private range of 64512 to 65534 or
+  4200000000 to 4294967294. Required if 'aws_dx_create_dx_gw' is true.
+  EOF
+  default     = 64512
 }
 
 variable "aws_dx_vif_address_family" {
