@@ -25,7 +25,7 @@ output "fabric_connection_speed" {
 
 output "fabric_connection_speed_unit" {
   description = "Connection speed unit."
-  value       = module.equinix-fabric-connection.primary_connection.speed_unit
+  value       = "MB"
 }
 
 output "fabric_connection_seller_metro" {
