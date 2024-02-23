@@ -44,7 +44,6 @@ module "equinix-fabric-connection" {
   vlan_stag                 = var.fabric_vlan_stag
   service_token_id          = var.fabric_service_token_id
   speed                     = var.fabric_speed
-  speed_unit                = "MB"
   purchase_order_number    = var.fabric_purchase_order_number
 }
 
